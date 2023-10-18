@@ -1,5 +1,5 @@
 <template>
-    <section id="form" class="w-1/2 m-auto mt-4 border border-gray-300 rounded-md p-5">
+    <section id="form" class="md:w-1/2 m-auto mt-4 border border-gray-300 rounded-md p-5">
         <div class="input-group flex flex-col my-2">
             <label for="name">Nome Completo</label>
             <input type="text" placeholder="Digite seu nome completo" class="rounded-md border border-gray-300 py-2 px-4">
@@ -8,7 +8,7 @@
             <label for="name">E-mail</label>
             <input type="text" placeholder="Digite seu nome completo" class="rounded-md border border-gray-300 py-2 px-4">
         </div>
-        <div class="input-half-size grid grid-cols-2 gap-5">
+        <div class="input-half-size grid md:grid-cols-2 md:gap-5">
             <div class="input-group flex flex-col my-2">
                 <label for="name">Telefone</label>
                 <input type="text" placeholder="Digite seu telefone" class="rounded-md border border-gray-300 py-2 px-4">
@@ -22,7 +22,7 @@
             <label for="name">Endereço</label>
             <input type="text" placeholder="Digite seu nome completo" class="rounded-md border border-gray-300 py-2 px-4">
         </div>
-        <div class="input-half-size grid grid-cols-2 gap-5">
+        <div class="input-half-size grid md:grid-cols-2 md:gap-5">
             <div class="input-group flex flex-col my-2">
                 <label for="name">Número</label>
                 <input type="text" placeholder="Número" class="rounded-md border border-gray-300 py-2 px-4">
@@ -36,14 +36,14 @@
             <label for="name">Bairro</label>
             <input type="text" placeholder="Digite seu bairro" class="rounded-md border border-gray-300 py-2 px-4">
         </div>
-        <div class="input-half-size grid grid-cols-2 gap-5">
+        <div class="input-half-size grid md:grid-cols-2 md:gap-5">
             <div class="input-group flex flex-col my-2">
                 <label for="name">Cidade</label>
                 <input type="text" placeholder="Digite sua cidade" class="rounded-md border border-gray-300 py-2 px-4">
             </div>
             <div class="input-group flex flex-col my-2">
                 <label for="state">Selecione um estado:</label>
-                <select id="state" name="state" class="rounded-md border border-gray-300 py-2 px-4">
+                <select id="state" class="rounded-md border border-gray-300 py-2 px-4">
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
                     <option value="AP">Amapá</option>
@@ -78,8 +78,3 @@
     </section>
 </template>
 
-<script>
-export default {
-    name: 'FormComponent',
-}
-</script>

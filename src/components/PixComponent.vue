@@ -1,8 +1,8 @@
 <template>
-    <div id="pix" class="mt-5">
+    <div id="pix" class="mt-5" :class="{'hidden': this.hidden}">
         <div id="pix-info">
             <h2 class="text-center mb-5 text-sm text-gray-600">Libere sua compra rapidamente pagando com o Pix!</h2>
-            <div class="grid grid-cols-2 gap-5">
+            <div class="grid md:grid-cols-2 gap-5">
                 <div class="rounded-md border border-gray-300 p-3 flex flex-col justify-start items-center text-center">
                     <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16 8.33335V16.3333L21.3333 19M29.3333 16.3333C29.3333 23.6971 23.3638 29.6667 16 29.6667C8.63621 29.6667 2.66667 23.6971 2.66667 16.3333C2.66667 8.96955 8.63621 3.00002 16 3.00002C23.3638 3.00002 29.3333 8.96955 29.3333 16.3333Z" stroke="#939598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -36,5 +36,11 @@
     </div>
 </template>
 
-<script setup>
+<script>
+export default {
+    name: 'PixComponent',
+    props: {
+        hidden: Boolean
+    }
+}
 </script>

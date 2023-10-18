@@ -1,8 +1,8 @@
 <template>
-    <div id="ticket" class="mt-5">
+    <div id="ticket" class="mt-5" :class="{'hidden': this.hidden}">
         <div id="ticket-info">
-            <h2 class="text-left mb-5 text-sm text-gray-600">Atençã:</h2>
-            <div class="grid grid-cols-3 gap-5">
+            <h2 class="text-left mb-5 text-sm text-gray-600">Atenção:</h2>
+            <div class="grid md:grid-cols-3 gap-5">
                 <div class="rounded-md border border-gray-300 p-3 flex flex-col justify-start items-center text-center">
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 6.83335V14.8333L20.3333 17.5M28.3333 14.8333C28.3333 22.1971 22.3638 28.1667 15 28.1667C7.63616 28.1667 1.66663 22.1971 1.66663 14.8333C1.66663 7.46955 7.63616 1.50002 15 1.50002C22.3638 1.50002 28.3333 7.46955 28.3333 14.8333Z" stroke="#939598" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -26,5 +26,11 @@
     </div>
 </template>
 
-<script setup>
+<script>
+export default {
+    name: 'TicketComponent',
+    props: {
+        hidden: Boolean
+    }
+}
 </script>

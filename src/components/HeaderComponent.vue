@@ -1,6 +1,6 @@
 <template>
-    <section id="header" class="w-1/2 m-auto mt-4 border border-gray-300 rounded-md">
-        <div class="grid grid-cols-4 p-5 gap-5 items-center relative">
+    <section id="header" class="md:w-1/2 m-auto md:mt-4 border border-gray-300 rounded-md">
+        <div class="grid grid-cols-4 p-5 gap-5 items-center relative pt-12 md:pt-4">
             <div>
                 <img src="@/assets/image/img.png" alt="Imagem header">
             </div>
@@ -9,7 +9,7 @@
                 <p class="font-medium text-orange-500 text-2xl">R$ 50,00 / mês</p>
                 <p class="text-sm">Plano mensal com renovação automática</p>
             </div>
-            <div class="absolute right-5 top-2">
+            <div class="absolute right-1 top-1 md:right-5 md:top-2">
                 <select id="state" name="state" class="rounded-md border border-gray-300 py-2 px-4 text-gray-400">
                     <option selected disabled>Alterar país</option>
                     <option value="BR">Brasil</option>
