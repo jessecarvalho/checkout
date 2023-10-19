@@ -2,23 +2,25 @@
     <div id="credit-card" class="md:grid md:grid-cols-2 mt-5 gap-5" :class="{'hidden md:hidden': this.hidden}">
         <div id="credit-card-info">
             <div class="input-group flex flex-col my-2">
-                <label for="name" class="text-sm">Número do Cartão</label>
-                <input v-model="creditCardNumber" @blur="checkCreditCartValidation" @input="validateCreditCard" type="number"  placeholder="Digite somente os números" class="rounded-md border border-gray-300 py-2 px-4 " maxlength='16'>
-                <p class="text-red-500" :class="{'hidden': !this.showCreditCardError}">Cartão inválido</p>
+                <label class="text-sm">Número do Cartão</label>
+                <the-mask :mask="['#### #### #### ####']" v-model="localCreditCardNumber" @input="emitCreditCardNumberChange" @focus="emitCreditCardNumberFocus" @blur="emitCreditCardNumberBlur"  type="text"  placeholder="Digite somente os números" class="rounded-md border border-gray-300 py-2 px-4 " maxlength='20' />
+                <p class="text-red-500"> {{ creditCardNumberError }} </p>
             </div>
             <div class="input-group flex flex-col my-2">
-                <label for="name" class="text-sm">Titular do Cartão</label>
-                <input type="text" placeholder="Digite o nome impresso no cartão" class="rounded-md border border-gray-300 py-2 px-4">
+                <label class="text-sm">Titular do Cartão</label>
+                <input type="text" placeholder="Digite o nome impresso no cartão" class="rounded-md border border-gray-300 py-2 px-4" v-model="localCreditCardName" @input="emitCreditCardNameChange" @focus="emitCreditCardNameFocus" @blur="emitCreditCardNameBlur">
+                <p class="text-red-500"> {{ creditCardNameError }} </p>
             </div>
             <div class="input-group flex flex-col my-2">
-                <label for="name" class="text-sm">CPF/CNPJ do Titular</label>
-                <input type="text" placeholder="Para emissão da nota fiscal" class="rounded-md border border-gray-300 py-2 px-4">
+                <label class="text-sm">CPF/CNPJ do Titular</label>
+                <the-mask :mask="['###.###.###.##', '##.###.###/####-##']"  type="text" placeholder="Para emissão da nota fiscal" class="rounded-md border border-gray-300 py-2 px-4" v-model="localCreditCardDocument" @input="emitCreditCardDocumentChange" @focus="emitCreditCardDocumentFocus" @blur="emitCreditCardDocumentBlur" />
+                <p class="text-red-500"> {{ localCreditCardDocumentError }} </p>
             </div>
             <div class="half-input grid grid-cols-3">
                 <div class="col-span-2 grid grid-cols-2">
                     <div class="input-group flex flex-col my-2">
-                        <label for="name" class="text-sm">Mês</label>
-                        <select id="state" class="rounded-md border border-gray-300 py-2 px-4">
+                        <label class="text-sm">Mês</label>
+                        <select id="state" class="rounded-md border border-gray-300 py-2 px-4" v-model="localCreditCardExpirationMonth" @input="emitCreditCardExpirationMonthChange" @focus="emitCreditCardExpirationMonthFocus" @blur="emitCreditCardExpirationMonthBlur">
                             <option value="" disabled selected>Mês</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -33,10 +35,11 @@
                             <option value="11">11</option>
                             <option value="12">12</option>
                         </select>
+                        <p class="text-red-500"> {{ localCreditCardExpirationMonthError }} </p>
                     </div>
                     <div class="input-group flex flex-col my-2">
-                        <label for="name" class="text-sm">Ano</label>
-                        <select id="state" class="rounded-md border border-gray-300 py-2 px-4">
+                        <label class="text-sm">Ano</label>
+                        <select id="state" class="rounded-md border border-gray-300 py-2 px-4" v-model="localCreditCardExpirationYear" @input="emitCreditCardExpirationYearChange" @focus="emitCreditCardExpirationYearFocus" @blur="emitCreditCardExpirationYearBlur">
                             <option value="" disabled selected>Ano</option>
                             <option value="2023">2023</option>
                             <option value="2024">2024</option>
@@ -45,19 +48,22 @@
                             <option value="2027">2027</option>
                             <option value="2028">2028</option>
                         </select>
+                        <p class="text-red-500"> {{ localCreditCardExpirationYearError }} </p>
                     </div>
                 </div>
                 <div class="input-group flex flex-col my-2">
-                    <label for="name" class="text-sm">CVV</label>
-                    <input type="text" placeholder="CVV" class="rounded-md border border-gray-300 py-2 px-4">
+                    <label class="text-sm">CVV</label>
+                    <input type="text" placeholder="CVV" class="rounded-md border border-gray-300 py-2 px-4" v-model="localCreditCardCvv" @input="emitCreditCardCvvChange" @focus="emitCreditCardCvvFocus" @blur="emitCreditCardCvvBlur">
+                    <p class="text-red-500"> {{ localCreditCardCvvError }} </p>
                 </div>
             </div>
             <div class="input-group flex flex-col my-2">
-                <label for="name" class="text-sm">Número de parcelas</label>
-                <select id="state" class="rounded-md border border-gray-300 py-2 px-4">
-                    <option value="1" checked>1x de R$ 50,00</option>
+                <label class="text-sm">Número de parcelas</label>
+                <select id="creditCard" class="rounded-md border border-gray-300 py-2 px-4" v-model="localCreditCardInstallments" @input="emitCreditCardInstallmentsChange" @focus="emitCreditCardInstallmentsFocus" @blur="emitCreditCardInstallmentsBlur">
+                    <option value="1">1x de R$ 50,00</option>
                     <option value="2">2x de R$ 25,00</option>
                     <option value="3">3x de R$ 16,66</option>
+                    <p class="text-red-500"> {{ localCreditCardInstallmentsError }} </p>
                 </select>
             </div>
         </div>
@@ -72,15 +78,16 @@
                     <img src="@/assets/image/hipercard.png" alt="hipercard" class="w-10" :class="{'hidden': this.hipercardHidden}">
                     <img src="@/assets/image/elo.png" alt="elo" class="w-10" :class="{'hidden': this.eloHidden}">
                 </div>
-                <p class="text-white my-3">#### #### #### ####</p>
+                <p class="text-white my-3">{{ localCreditCardNumber || '#### #### #### ####' }}</p>
                 <div class="grid grid-cols-2">
                     <div>
                         <p class="text-white text-xs font-light">Titular</p>
-                        <p class="text-white text-xs">Nome Completo</p>
+                        <p class="text-white text-xs">{{ localCreditCardName || 'Nome Completo' }}</p>
                     </div>
                     <div>
                         <p class="text-white text-xs font-light">Validade</p>
-                        <p class="text-white text-xs font-light">Mês/Ano</p>
+                        <p class="text-white text-xs font-light">{{ (localCreditCardExpirationMonth || 'Mês') + '/' + (localCreditCardExpirationYear || 'Ano') }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -93,7 +100,6 @@ export default {
     name: 'CreditCardComponent',
     data() {
         return {
-            creditCardNumber: '',
             isCreditCardValid: false,
             creditCardRegex: {
                 visa: /^4[0-9]{15}$/,
@@ -109,13 +115,30 @@ export default {
             amexHidden: true,
             hipercardHidden: true,
             eloHidden: true,
-            showCreditCardError: false,
+            localCreditCardNumber: this.creditCardNumber,
+            localCreditCardName: this.creditCardName,
+            localCreditCardDocument: this.creditCardDocument,
+            localCreditCardExpirationMonth: this.creditCardExpirationMonth,
+            localCreditCardExpirationYear: this.creditCardExpirationYear,
+            localCreditCardCvv: this.creditCardCvv,
+            localCreditCardInstallments: this.creditCardInstallments,
+            localCreditCardNumberError: this.creditCardNumberError,
+            localCreditCardNameError: this.creditCardNameError,
+            localCreditCardDocumentError: this.creditCardDocumentError,
+            localCreditCardExpirationMonthError: this.creditCardExpirationMonthError,
+            localCreditCardExpirationYearError: this.creditCardExpirationYearError,
+            localCreditCardCvvError: this.creditCardCvvError,
+            localCreditCardInstallmentsError: this.creditCardInstallmentsError,
         };
     },
     methods: {
+        emitCreditCardNumberChange() {
+            this.$emit('creditCardNumberChange', this.localCreditCardNumber);
+            this.validateCreditCard();
+        },
         validateCreditCard() {
             for (const type in this.creditCardRegex) {
-                if (this.creditCardRegex[type].test(this.creditCardNumber)) {
+                if (this.creditCardRegex[type].test(this.localCreditCardNumber)) {
                     if (type === "visa") {
                         this.hiddenAllFlags();
                         this.visaHidden = false;
@@ -135,7 +158,6 @@ export default {
                         this.hiddenAllFlags();
                         this.eloHidden = false;
                     }
-                    this.showCreditCardError = false;
                     this.isCreditCardValid = true;
                     return;
                 }
@@ -153,12 +175,87 @@ export default {
         },
         checkCreditCartValidation() {
             if (!this.isCreditCardValid) {
-                this.showCreditCardError = true;
+                this.localCreditCardNumberError = "Número de cartão inválido";
             }
-        }
+        },
+        emitCreditCardNameChange() {
+            this.$emit('creditCardNameChange', this.localCreditCardName);
+        },
+        emitCreditCardDocumentChange() {
+            this.$emit('creditCardDocumentChange', this.localCreditCardDocument);
+        },
+        emitCreditCardExpirationMonthChange() {
+            this.$emit('creditCardExpirationMonthChange', this.localCreditCardExpirationMonth);
+        },
+        emitCreditCardExpirationYearChange() {
+            this.$emit('creditCardExpirationYearChange', this.localCreditCardExpirationYear);
+        },
+        emitCreditCardCvvChange() {
+            this.$emit('creditCardCvvChange', this.localCreditCardCvv);
+        },
+        emitCreditCardInstallmentsChange() {
+            this.$emit('creditCardInstallmentsChange', this.localCreditCardInstallments);
+        },
+        emitCreditCardNumberFocus() {
+            this.$emit('creditCardNumberFocus');
+        },
+        emitCreditCardNameFocus() {
+            this.$emit('creditCardNameFocus');
+        },
+        emitCreditCardDocumentFocus() {
+            this.$emit('creditCardDocumentFocus');
+        },
+        emitCreditCardExpirationMonthFocus() {
+            this.$emit('creditCardExpirationMonthFocus');
+        },
+        emitCreditCardExpirationYearFocus() {
+            this.$emit('creditCardExpirationYearFocus');
+        },
+        emitCreditCardCvvFocus() {
+            this.$emit('creditCardCvvFocus');
+        },
+        emitCreditCardInstallmentsFocus() {
+            this.$emit('creditCardInstallmentsFocus');
+        },
+        emitCreditCardNumberBlur() {
+            this.$emit('creditCardNumberBlur');
+            this.checkCreditCartValidation();
+        },
+        emitCreditCardNameBlur() {
+            this.$emit('creditCardNameBlur');
+        },
+        emitCreditCardDocumentBlur() {
+            this.$emit('creditCardDocumentBlur');
+        },
+        emitCreditCardExpirationMonthBlur() {
+            this.$emit('creditCardExpirationMonthBlur');
+        },
+        emitCreditCardExpirationYearBlur() {
+            this.$emit('creditCardExpirationYearBlur');
+        },
+        emitCreditCardCvvBlur() {
+            this.$emit('creditCardCvvBlur');
+        },
+        emitCreditCardInstallmentsBlur() {
+            this.$emit('creditCardInstallmentsBlur');
+        },
     },
     props: {
-        hidden: Boolean
+        hidden: Boolean,
+        creditCardNumber: String,
+        creditCardName: String,
+        creditCardDocument: String,
+        creditCardExpirationMonth: String,
+        creditCardExpirationYear: String,
+        creditCardCvv: String,
+        creditCardInstallments: Number,
+        creditCardNumberError: String,
+        creditCardNameError: String,
+        creditCardDocumentError: String,
+        creditCardExpirationMonthError: String,
+        creditCardExpirationYearError: String,
+        creditCardCvvError: String,
+        creditCardInstallmentsError: String,
     },
 }
 </script>

@@ -1,0 +1,18 @@
+
+
+Purchase - Disparar ao clickar em compra e o formulário é válido
+PurchaseFail - Disparar ao clickar em compra e o formulário é inválido
+
+------------------------
+FAZENDO
+
+
+------------------------
+FEITOS
+
+CloseWindow - Disparar quando o usuário tentar fechar a aba do navegador ou sair da página
+ChangeWindow - Disparar quando o usuário mover o cursor para fora do frame da window
+AddToCart - Disparar quando o usuário insere Nome + Telefone OU Nome + Email
+FillAddress - Disparar quando o usuário colocar o cep + número
+InitiateCheckout - Disparar no primeiro input focus do usuário
+AddPaymentInfo - Disparar CPF/CNPJ quando usuário escolher pix/boleto ou informações do cartão de credito quando o usuário escolher cartão de crédito

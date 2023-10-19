@@ -1,0 +1,27 @@
+1 - Imagine a estrutura de componentes e arquivos que você pretende montar, comece em /src. Faça a descrição como no exemplo quando/onde achar necessário.
+
+/src/assets/css -> style do checkout deverá estar arqui, junto da importação do tailwind
+/src/assets/images-> todas imagens do checkout deverão estar nessa pasta
+/src/components -> todos componentes do checkout deverão estar nessa pasta
+/src/components/HeaderComponent -> Deverá ter toda a trativa ao header do checkout
+/src/components/FormComponent -> Deverá ter o formulário principal com todos seus campos
+/src/components/PaymentComponent -> Este componente irá receber do App e compartilhará com os demais componentes o método de pagamento todas as variáveis necessárias para cada componente, também deverá fazer todo tratamento compartilhado entre os meios de pagamento.
+/src/components/PixComponent -> Deverá fazer o tratamento especifico para o meio de pagamento pix
+/src/components/CreditCardComponent -> Deverá fazer o tratamento especifico para o meio de pagamento cartão de crédito
+/src/components/TicketComponent -> Deverá fazer o tratamento especifico para o meio de pagamento boleto
+/src/components/FooterComponent -> Deverá ter o footer para o checkout
+/src/services -> Deverá ter todos os serviços necessários para o checkout
+/src/services/ViaCepService -> Deverá ter toda a tratativa para a conexão com o banco de dados
+/src/App -> Deverá inicializar e gerenciar todas as variáveis e métodos compartilhados necessários para o checkout assim como gerenciar os outros componentes
+
+2 - Após o planejamento, por onde você costuma começar?
+Pelo desenvolvimento da estrutura com html, como usarei tailwind, irei começar desenvolvendo a estrutura juntamente da estilização.
+
+3 - Onde você imagina que está o maior grau de dificuldade dessa tarefa?
+A questão do sistema de eventos, que deverá ser feito com cuidado pois terá muitas variáveis compartilhadas entre os componentes e então precisará de uma estrutura sólida e eficaz desde o inicio para não haver problemas no decorrer.
+
+4 - Mencione alguns possíveis bugs em cada um dos requisitos aos quais você quer se atentar.
+O citado na resposta anterior é o principal, mas também devo me atentar muito com a possibilidade do usuário cometer erros ou nao saber como preencher cada input corretamente, por isso será necessário colocar mascaras e validar os input adequadamente, também vou precisar tomar cuidado com multitelas e deploy.
+
+5 - Existe algum design pattern conhecido que você aplicaria? Se sim, cite-o(s).
+Eu poderia utilizar o vuex para gerênciar os estados da aplicação, mas como o projeto é pequeno, acredito que utilizar apenas o mvvm que já é o design pattern padrão do vue irá ser mais interessante para não adicionar complexidade e custos desnecessários ao projeto.
