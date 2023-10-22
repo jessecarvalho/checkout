@@ -92,6 +92,7 @@
             @checkout-click="handleCheckoutClick"
         >
         </payment-component>
+
         <footer-component></footer-component>
     </div>
 </template>
@@ -102,7 +103,7 @@ import FormComponent from './components/FormComponent.vue'
 import PaymentComponent from './components/PaymentComponent.vue'
 import FooterComponent from './components/FooterComponent.vue'
 
-export default {
+export default  {
     name: 'App',
     components: {
       HeaderComponent,

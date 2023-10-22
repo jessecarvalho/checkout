@@ -9,14 +9,6 @@
                 <p class="font-medium text-orange-500 text-2xl">R$ 50,00 / mês</p>
                 <p class="text-sm">Plano mensal com renovação automática</p>
             </div>
-            <div class="absolute right-1 top-1 md:right-5 md:top-2">
-                <select id="state" name="state" class="rounded-md border border-gray-300 py-2 px-4 text-gray-400">
-                    <option selected disabled>Alterar país</option>
-                    <option value="BR">Brasil</option>
-                    <option value="US">USA</option>
-                    <option value="AR">Argentina</option>
-                </select>
-            </div>
         </div>
         <div id="email" class="bg-orange-600 text-white py-2 px-4">
             contatolivrediet@gmail.com

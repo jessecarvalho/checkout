@@ -2,57 +2,58 @@
     <section id="form" class="md:w-1/2 m-auto mt-4 border border-gray-300 rounded-md p-5">
         <div class="input-group flex flex-col my-2">
             <label >Nome Completo</label>
-                <input type="text" placeholder="Digite seu nome completo" class="rounded-md border border-gray-300 py-2 px-4" v-model="localName" @input="emitNameChange" @focus="emitNameFocus" @blur="emitNameBlur" ref="name">
+                <input @input="validateFormName" @blur="validateFormName" type="text" placeholder="Digite seu nome completo" class="rounded-md border border-gray-300 py-2 px-4" v-model="localName">
                 <p class="text-red-500">{{ nameError }}</p>
         </div>
         <div class="input-group flex flex-col my-2">
             <label>E-mail</label>
-            <input type="text" placeholder="Digite seu e-mail" class="rounded-md border border-gray-300 py-2 px-4" v-model="localEmail" @input="emitEmailChange" @focus="emitEmailFocus" @blur="emitEmailBlur">
+            <input @input="validateFormEmail" @blur="validateFormEmail" type="text" placeholder="Digite seu e-mail" class="rounded-md border border-gray-300 py-2 px-4" v-model="localEmail">
             <p class="text-red-500">{{ emailError }}</p>
         </div>
         <div class="input-half-size grid md:grid-cols-2 md:gap-5">
             <div class="input-group flex flex-col my-2">
                 <label>Telefone</label>
-                <the-mask type="text" placeholder="Digite seu telefone" class="rounded-md border border-gray-300 py-2 px-4" @input="emitPhoneChange" v-model="localPhone"  :mask="['(##) ####-####', '(##) #####-####']" @focus="emitPhoneFocus" @blur="emitPhoneBlur" />
+                <the-mask @input="validateFormPhone" :masked="true" @blur.native="validateFormPhone" type="text" placeholder="Digite seu telefone" class="rounded-md border border-gray-300 py-2 px-4" v-model="localPhone" :mask="['(##) ####-####', '(##) #####-####']" />
                 <p class="text-red-500">{{ phoneError }}</p>
             </div>
             <div class="input-group flex flex-col my-2">
                 <label>CEP</label>
-                <the-mask :mask="['#####-###']" type="text" placeholder="Digite seu cep" class="rounded-md border border-gray-300 py-2 px-4" v-model="localZip" @input="emitZipChange" @focus="emitZipFocus" @blur="emitZipBlur" />
+                <the-mask @input="validateFormZip" @blur.native="validateFormZip" :mask="['#####-###']" type="text" placeholder="Digite seu cep" class="rounded-md border border-gray-300 py-2 px-4" v-model="localZip" />
                 <p class="text-red-500">{{ zipError }}</p>
             </div>
         </div>
         <div class="input-group flex flex-col my-2">
             <label>Endereço</label>
-            <input type="text" placeholder="Digite seu endereço completo" class="rounded-md border border-gray-300 py-2 px-4" v-model="localAddress" @input="emitAddresChange" readonly @focus="emitAddressFocus">
+            <input @input="validateFormAddress" @blur="validateFormAddress" type="text" placeholder="Digite seu endereço completo" class="rounded-md border border-gray-300 py-2 px-4" v-model="localAddress" readonly>
             <p class="text-red-500">{{ addressError }}</p>
         </div>
         <div class="input-half-size grid md:grid-cols-2 md:gap-5">
             <div class="input-group flex flex-col my-2">
                 <label>Número</label>
-                <input type="text" placeholder="Número" class="rounded-md border border-gray-300 py-2 px-4" v-model="localNumber" @input="emitNumberChange" @focus="emitNumberFocus" @blur="emitNumberBlur">
+                <input @input="validateFormNumber" @blur="validateFormNumber" type="text" placeholder="Número" class="rounded-md border border-gray-300 py-2 px-4" v-model="localNumber">
                 <p class="text-red-500">{{ numberError }}</p>
             </div>
             <div class="input-group flex flex-col my-2">
                 <label>Complemento</label>
-                <input type="text" placeholder="Digite seu complemento" class="rounded-md border border-gray-300 py-2 px-4" v-model="localComplement" @input="emitComplementChange" readonly @focus="emitComplementFocus">
+                <input @input="validateFormComplement" @blur="validateFormComplement" type="text" placeholder="Digite seu complemento" class="rounded-md border border-gray-300 py-2 px-4" v-model="localComplement" readonly>
                 <p class="text-red-500">{{ complementError }}</p>
             </div>
         </div>
         <div class="input-group flex flex-col my-2">
             <label>Bairro</label>
-            <input type="text" placeholder="Digite seu bairro" class="rounded-md border border-gray-300 py-2 px-4" v-model="localNeighborhood" @input="emitNeighbourhoodChange" readonly @focus="emitNeighbourhoodFocus">
+            <input @input="validateFormNeighborhood" @blur="validateFormNeighborhood" type="text" placeholder="Digite seu bairro" class="rounded-md border border-gray-300 py-2 px-4" v-model="localNeighborhood" readonly>
             <p class="text-red-500">{{ neighborhoodError }}</p>
         </div>
         <div class="input-half-size grid md:grid-cols-2 md:gap-5">
             <div class="input-group flex flex-col my-2">
                 <label>Cidade</label>
-                <input type="text" placeholder="Digite sua cidade" class="rounded-md border border-gray-300 py-2 px-4" v-model="localCity" @input="emitCityChange" readonly @focus="emitCityFocus">
+                <input @input="validateFormCity" @blur="validateFormCity" type="text" placeholder="Digite sua cidade" class="rounded-md border border-gray-300 py-2 px-4" v-model="localCity" readonly>
                 <p class="text-red-500">{{ cityError }}</p>
             </div>
             <div class="input-group flex flex-col my-2">
                 <label for="state">Selecione um estado:</label>
-                <select id="state" class="rounded-md border border-gray-300 py-2 px-4" v-model="localState" @input="emitStateChange" @focus="emitStateFocus" >
+                <select @input="validateFormState" @blur="validateFormState" id="state" class="rounded-md border border-gray-300 py-2 px-4" v-model="localState" >
+                    <option value="" selected disabled>Selecione um estado</option>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
                     <option value="AP">Amapá</option>
@@ -88,10 +89,14 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import {fetchCEP} from "@/services/ViaCepService.js";
 
 export default {
     name: 'FormComponent',
+    computed: {
+        ...mapGetters(["getForm"]),
+    },
     props: {
         name: String,
         email: String,
@@ -103,16 +108,6 @@ export default {
         city: String,
         state: String,
         zip: String,
-        nameError: String,
-        emailError: String,
-        phoneError: String,
-        addressError: String,
-        numberError: String,
-        complementError: String,
-        neighborhoodError: String,
-        cityError: String,
-        stateError: String,
-        zipError: String,
     },
     data() {
         return {
@@ -126,99 +121,134 @@ export default {
             localCity: this.city,
             localState: this.state,
             localZip: this.zip,
-            localNameError: this.nameError,
-            localEmailError: this.emailError,
-            localPhoneError: this.phoneError,
-            localAddressError: this.addressError,
-            localNumberError: this.numberError,
-            localComplementError: this.complementError,
-            localNeighborhoodError: this.neighborhoodError,
-            localCityError: this.cityError,
-            localStateError: this.stateError,
-            localZipError: this.zipError,
+            nameError: "",
+            emailError: "",
+            phoneError: "",
+            addressError: "",
+            numberError: "",
+            complementError: "",
+            neighborhoodError: "",
+            cityError: "",
+            stateError: "",
+            zipError: "",
         };
     },
     methods: {
-        emitNameChange() {
-            this.$emit('name-changed', this.localName);
+        ...mapActions(['updateForm']),
+        updateFormName() {
+            this.updateForm({ name: this.localName });
         },
-        emitEmailChange() {
-            this.$emit('email-changed', this.localEmail);
+        updateFormEmail() {
+            this.updateForm({ email: this.localEmail });
         },
-        emitPhoneChange() {
-            this.$emit('phone-changed', this.localPhone);
+        updateFormPhone() {
+            this.updateForm({ phone: this.localPhone });
         },
-        emitAddresChange() {
-            this.$emit('address-changed', this.localAddress);
+        updateFormAddress() {
+            this.updateForm({ address: this.localAddress });
         },
-        emitNumberChange() {
-            this.$emit('number-changed', this.localNumber);
+        updateFormNumber() {
+            this.updateForm({ number: this.localNumber });
         },
-        emitComplementChange() {
-            this.$emit('complement-changed', this.localComplement);
+        updateFormComplement() {
+            this.updateForm({ complement: this.localComplement });
         },
-        emitNeighbourhoodChange() {
-            this.$emit('neighborhood-changed', this.localNeighborhood);
+        updateFormNeighborhood() {
+            this.updateForm({ neighborhood: this.localNeighborhood });
         },
-        emitCityChange() {
-            this.$emit('city-changed', this.localCity);
+        updateFormCity() {
+            this.updateForm({ city: this.localCity });
         },
-        emitStateChange() {
-            this.$emit('state-changed', this.localState);
+        updateFormState() {
+            this.updateForm({ state: this.localState });
         },
-        emitZipChange() {
-            this.$emit('zip-changed', this.localZip);
-            this.zipCheck();
-        },
-        emitNameFocus() {
-            this.$emit('name-focus');
-        },
-        emitEmailFocus() {
-            this.$emit('email-focus');
-        },
-        emitPhoneFocus() {
-            this.$emit('phone-focus');
-        },
-        emitAddressFocus() {
-            this.$emit('address-focus');
-        },
-        emitNumberFocus() {
-            this.$emit('number-focus');
-        },
-        emitComplementFocus() {
-            this.$emit('complement-focus');
-        },
-        emitNeighbourhoodFocus() {
-            this.$emit('neighborhood-focus');
-        },
-        emitCityFocus() {
-            this.$emit('city-focus');
-        },
-        emitStateFocus() {
-            this.$emit('state-focus');
-        },
-        emitZipFocus() {
-            this.$emit('zip-focus');
-        },
-        emitNameBlur() {
-            this.$emit('name-blur');
-        },
-        emitEmailBlur() {
-            this.$emit('email-blur');
-        },
-        emitPhoneBlur() {
-            this.$emit('phone-blur');
-        },
-        emitNumberBlur() {
-            this.$emit('number-blur');
-        },
-        emitZipBlur() {
-            this.$emit('zip-blur');
+        updateFormZip() {
+            this.updateForm({ zip: this.localZip });
         },
         zipCheck() {
-            if (this.localZip.length === 8) {
-                this.getZipInfoByApi();
+            this.getZipInfoByApi();
+        },
+        validateFormName() {
+            console.log(this.localName);
+            if (this.localName === "") {
+                this.nameError = "Nome inválido";
+                return;
             }
+            this.nameError = "";
+            this.updateFormName();
+        },
+        validateFormEmail() {
+            if (this.localEmail === "") {
+                this.emailError = "E-mail inválido";
+                return;
+            }
+            this.emailError = "";
+            this.updateFormEmail();
+        },
+        validateFormPhone() {
+            if (this.localPhone === "" || this.localPhone.length < 14) {
+                this.phoneError = "Telefone inválido";
+                return;
+            }
+            this.phoneError = "";
+            this.updateFormPhone();
+        },
+        validateFormAddress() {
+            if (this.localAddress === "") {
+                this.addressError = "Endereço inválido";
+                return;
+            }
+            this.addressError = "";
+            this.updateFormAddress();
+        },
+        validateFormNumber() {
+            if (this.localNumber === "") {
+                this.numberError = "Número inválido";
+                return;
+            }
+            this.numberError = "";
+            this.updateFormNumber();
+        },
+        validateFormComplement() {
+            if (this.localComplement === "") {
+                this.complementError = "Complemento inválido";
+                return;
+            }
+            this.complementError = "";
+            this.updateFormComplement();
+        },
+        validateFormNeighborhood() {
+            if (this.localNeighborhood === "") {
+                this.neighborhoodError = "Bairro inválido";
+                return;
+            }
+            this.neighborhoodError = "";
+            this.updateFormNeighborhood();
+        },
+        validateFormCity() {
+            if (this.localCity === "") {
+                this.cityError = "Cidade inválida";
+                return;
+            }
+            this.cityError = "";
+            this.updateFormCity();
+        },
+        validateFormState() {
+            if (this.localState === "") {
+                this.stateError = "Estado inválido";
+                return;
+            }
+            this.stateError = "";
+            this.updateFormState();
+        },
+        validateFormZip() {
+            if (this.localZip === "" || this.localZip.length < 8) {
+                this.zipError = "CEP inválido";
+                return;
+            }
+            this.zipError = "";
+            this.updateFormZip();
+            this.zipCheck();
         },
         getZipInfoByApi() {
             fetchCEP(this.localZip)
@@ -227,10 +257,6 @@ export default {
                     this.localNeighborhood = response.bairro;
                     this.localCity = response.localidade;
                     this.localState = response.uf;
-                    this.emitAddresChange();
-                    this.emitNeighbourhoodChange();
-                    this.emitCityChange();
-                    this.emitStateChange();
                 })
                 .catch((error) => {
                     console.error(error);

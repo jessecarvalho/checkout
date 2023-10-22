@@ -40,27 +40,6 @@
             :creditCardExpirationYearError="this.creditCardExpirationYearError"
             :creditCardCvvError="this.creditCardCvvError"
             :creditCardInstallmentsError="this.creditCardInstallmentsError"
-            @creditCardNumberChange="emitCreditCardNumberChange"
-            @creditCardNameChange="emitCreditCardNameChange"
-            @creditCardDocumentChange="emitCreditCardDocumentChange"
-            @creditCardExpirationMonthChange="emitCreditCardExpirationMonthChange"
-            @creditCardExpirationYearChange="emitCreditCardExpirationYearChange"
-            @creditCardCvvChange="emitCreditCardCvvChange"
-            @creditCardInstallmentsChange="emitCreditCardInstallmentsChange"
-            @creditCardNumberFocus="emitCreditCardNumberFocus"
-            @creditCardNameFocus="emitCreditCardNameFocus"
-            @creditCardDocumentFocus="emitCreditCardDocumentFocus"
-            @creditCardExpirationMonthFocus="emitCreditCardExpirationMonthFocus"
-            @creditCardExpirationYearFocus="emitCreditCardExpirationYearFocus"
-            @creditCardCvvFocus="emitCreditCardCvvFocus"
-            @creditCardInstallmentsFocus="emitCreditCardInstallmentsFocus"
-            @creditCardNumberBlur="emitCreditCardNumberBlur"
-            @creditCardNameBlur="emitCreditCardNameBlur"
-            @creditCardDocumentBlur="emitCreditCardDocumentBlur"
-            @creditCardExpirationMonthBlur="emitCreditCardExpirationMonthBlur"
-            @creditCardExpirationYearBlur="emitCreditCardExpirationYearBlur"
-            @creditCardCvvBlur="emitCreditCardCvvBlur"
-            @creditCardInstallmentsBlur="emitCreditCardInstallmentsBlur"
 
         >
         </credit-card-component>
@@ -88,10 +67,10 @@
             </p>
             <div class="input-group flex flex-col my-2 md:w-1/2" :class="{'hidden': !creditCardHidden || (pixHidden && ticketHidden)}">
                 <label class="text-sm">CPF/CNPJ (Para emissão de Nota Fiscal)</label>
-                <the-mask :mask="['###.###.###.##', '##.###.###/####-##']"  type="text" placeholder="" class="rounded-md border border-gray-300 py-2 px-4" v-model="localPaymentDoc" @input="emitCreditCardDocumentChange" />
+                <the-mask :mask="['###.###.###.##', '##.###.###/####-##']"  type="text" placeholder="" class="rounded-md border border-gray-300 py-2 px-4" v-model="localPaymentDoc" />
                 <p class="text-red-500"> {{ paymentDocError }} </p>
             </div>
-            <button class="w-full md:w-fit md:px-28 py-3 bg-orange-400 text-white cursor-pointer mt-5 hover:bg-orange-500" @click="emitCheckoutClick">Comprar Agora</button>
+            <button class="w-full md:w-fit md:px-28 py-3 bg-orange-400 text-white cursor-pointer mt-5 hover:bg-orange-500" >Comprar Agora</button>
             <div class="flex items-center justify-center">
                 <img src="@/assets/image/secure.png" alt="Site Seguro" class="w-48 mt-5">
             </div>
@@ -155,75 +134,6 @@ export default {
             this.creditCardHidden = true;
             this.pixHidden = true;
         },
-        emitCreditCardNumberChange() {
-            this.$emit('creditCardNameChange', this.creditCardNumber);
-        },
-        emitCreditCardNameChange() {
-            this.$emit('creditCardNameChange', this.creditCardName);
-        },
-        emitCreditCardDocumentChange() {
-            this.$emit('creditCardDocumentChange', this.creditCardDocument);
-        },
-        emitCreditCardExpirationMonthChange() {
-            this.$emit('creditCardExpirationMonthChange', this.creditCardExpirationMonth);
-        },
-        emitCreditCardExpirationYearChange() {
-            this.$emit('creditCardExpirationYearChange', this.creditCardExpirationYear);
-        },
-        emitCreditCardCvvChange() {
-            this.$emit('creditCardCvvChange', this.creditCardCvv);
-        },
-        emitCreditCardInstallmentsChange() {
-            this.$emit('creditCardInstallmentsChange', this.creditCardInstallments);
-        },
-        emitCreditCardNumberFocus() {
-            this.$emit('creditCardNumberFocus');
-        },
-        emitCreditCardNameFocus() {
-            this.$emit('creditCardNameFocus');
-        },
-        emitCreditCardDocumentFocus() {
-            this.$emit('creditCardDocumentFocus');
-        },
-        emitCreditCardExpirationMonthFocus() {
-            this.$emit('creditCardExpirationMonthFocus');
-        },
-        emitCreditCardExpirationYearFocus() {
-            this.$emit('creditCardExpirationYearFocus');
-        },
-        emitCreditCardCvvFocus() {
-            this.$emit('creditCardCvvFocus');
-        },
-        emitCreditCardInstallmentsFocus() {
-            this.$emit('creditCardInstallmentsFocus');
-        },
-        emitCreditCardNumberBlur() {
-            this.$emit('creditCardNumberBlur');
-        },
-        emitCreditCardNameBlur() {
-            this.$emit('creditCardNameBlur');
-        },
-        emitCreditCardDocumentBlur() {
-            this.$emit('creditCardDocumentBlur');
-        },
-        emitCreditCardExpirationMonthBlur() {
-            this.$emit('creditCardExpirationMonthBlur');
-        },
-        emitCreditCardExpirationYearBlur() {
-            this.$emit('creditCardExpirationYearBlur');
-        },
-        emitCreditCardCvvBlur() {
-            this.$emit('creditCardCvvBlur');
-        },
-        emitCreditCardInstallmentsBlur() {
-            this.$emit('creditCardInstallmentsBlur');
-        },
-        emitCheckoutClick() {
-            this.$emit('checkout-click');
-        },
-        emitPaymentDocBlur() {
-            this.$emit('paymentDocBlur');
-        }
     }
 }
 </script>

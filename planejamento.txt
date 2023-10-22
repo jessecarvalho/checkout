@@ -25,3 +25,5 @@ O citado na resposta anterior é o principal, mas também devo me atentar muito 
 
 5 - Existe algum design pattern conhecido que você aplicaria? Se sim, cite-o(s).
 Eu poderia utilizar o vuex para gerênciar os estados da aplicação, mas como o projeto é pequeno, acredito que utilizar apenas o mvvm que já é o design pattern padrão do vue irá ser mais interessante para não adicionar complexidade e custos desnecessários ao projeto.
+
+Infelizmente por uma escolha errada de design pattern e por ter tido pouco tempo esses dias eu não consegui terminar o projeto 100%, porém de qualquer forma segue o link do repositório com o código caso haja interesse em ver o que eu consegui fazer até o momento.,
